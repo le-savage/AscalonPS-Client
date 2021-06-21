@@ -11,7 +11,7 @@ import java.util.zip.ZipInputStream;
 public class CacheDownloader implements Runnable {
 
     private static final String CACHE_PATH = System.getProperty("user.home") + File.separator + "JanusCache" + File.separator;
-    private static final String ZIP_URL = "https://www.janus.rip/downloads/JanusCache.zip";
+    private static final String ZIP_URL = "https://www.janus.rip/files/cache/JanusCache.zip";
     private static final String VERSION_FILE = CACHE_PATH + "cacheVersion.dat";
 
     private CacheDownloader.GUI g;

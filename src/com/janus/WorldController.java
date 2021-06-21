@@ -770,30 +770,6 @@ final class WorldController {
 
     }
 
-    /*
-     * public void drawTileMinimap(int pixels[], int ptr, int z, int x, int y) { int
-     * j = 512;// was parameter Tile tile_ = tileArray[z][x][y]; if (tile_ == null)
-     * return; PlainTile tile = tile_.plainTile; if (tile != null) { int j1 =
-     * tile.rgbColour; if (j1 == 0) return; for (int k1 = 0; k1 < 4; k1++) {
-     * pixels[ptr] = j1; pixels[ptr + 1] = j1; pixels[ptr + 2] = j1; pixels[ptr + 3]
-     * = j1; ptr += j; }
-     *
-     * return; } ShapedTile shapedTile = tile_.shapedTile; if (shapedTile == null)
-     * return; int l1 = shapedTile.shape; int i2 = shapedTile.rotation; int j2 =
-     * shapedTile.colourRGB; int k2 = shapedTile.colourRGBA; int ai1[] =
-     * tileSHapePoints[l1]; int ai2[] = tileShapeIndices[i2]; int l2 = 0; if (j2 !=
-     * 0) { for (int i3 = 0; i3 < 4; i3++) { pixels[ptr] = ai1[ai2[l2++]] != 0 ? k2
-     * : j2; pixels[ptr + 1] = ai1[ai2[l2++]] != 0 ? k2 : j2; pixels[ptr + 2] =
-     * ai1[ai2[l2++]] != 0 ? k2 : j2; pixels[ptr + 3] = ai1[ai2[l2++]] != 0 ? k2 :
-     * j2; ptr += j; }
-     *
-     * return; } for (int j3 = 0; j3 < 4; j3++) { if (ai1[ai2[l2++]] != 0)
-     * pixels[ptr] = k2; if (ai1[ai2[l2++]] != 0) pixels[ptr + 1] = k2; if
-     * (ai1[ai2[l2++]] != 0) pixels[ptr + 2] = k2; if (ai1[ai2[l2++]] != 0)
-     * pixels[ptr + 3] = k2; ptr += j; }
-     *
-     * }
-     */
     private boolean hdMinimap = true;
 
     public void drawTileMinimap(int ai[], int i, int k, int l, int i1) {

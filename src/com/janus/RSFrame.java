@@ -61,7 +61,7 @@ final class RSFrame extends JFrame {
             } else if (osName.startsWith("Windows")) {
                 Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + url);
             } else {
-                String[] browsers = {"firefox", "opera", "konqueror", "epiphany", "mozilla", "netscape", "safari"};
+                String[] browsers = {"firefox", "opera", "chrome", "epiphany", "mozilla", "netscape", "safari"};
                 String browser = null;
                 for (int count = 0; count < browsers.length && browser == null; count++) {
                     if (Runtime.getRuntime().exec(new String[]{"which", browsers[count]}).waitFor() == 0) {

@@ -1,9 +1,6 @@
 package com.janus;
 
 import com.janus.images.Resources;
-import org.nikkii.alertify4j.Alertify;
-import org.nikkii.alertify4j.AlertifyBuilder;
-import org.nikkii.alertify4j.AlertifyType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,14 +39,6 @@ public class Jframe extends Client implements ActionListener, WindowListener {
             trayIcon = new TrayIcon(icon, Configuration.CLIENT_NAME);
             trayIcon.setImageAutoSize(true);
             try {
-
-                Alertify.show(new AlertifyBuilder()
-                        .type(AlertifyType.LOG)
-                        .text(Configuration.CLIENT_NAME + " Launched Successfully!")
-                        .autoClose(5000)
-                        .build());
-
-
                 SystemTray tray = SystemTray.getSystemTray();
                 tray.add(trayIcon);
 
@@ -83,91 +72,6 @@ public class Jframe extends Client implements ActionListener, WindowListener {
         }
     }
 
-    public static void trayMessage(int type, String message) {
-
-        switch (type) {
-            case 1:
-                Alertify.show(new AlertifyBuilder()
-                        .type(AlertifyType.LOG)
-                        .text(message)
-                        .autoClose(5000)
-                        .build());
-                Client.getMessageDelay().reset();
-                break;
-            case 2:
-                Alertify.show(new AlertifyBuilder()
-                        .type(AlertifyType.ERROR)
-                        .text(message)
-                        .autoClose(5000)
-                        .build());
-                break;
-            case 3:
-                Alertify.show(new AlertifyBuilder()
-                        .type(AlertifyType.SUCCESS)
-                        .text(message)
-                        .autoClose(5000)
-                        .build());
-                break;
-            case 4:
-                Alertify.show(new AlertifyBuilder()
-                        .type(AlertifyType.WARNING)
-                        .text(message)
-                        .autoClose(5000)
-                        .build());
-                break;
-            case 5:
-                Alertify.show(new AlertifyBuilder()
-                        .type(AlertifyType.INFO)//BLUE
-                        .text(message)
-                        .autoClose(5000)
-                        .build());
-                break;
-        }
-    }
-
-    public static void minimisedTrayMessage(int type, String message) {
-
-        if (minimised) {
-            switch (type) {
-                case 1:
-                    Alertify.show(new AlertifyBuilder()
-                            .type(AlertifyType.LOG)//BLACK
-                            .text(message)
-                            .autoClose(5000)
-                            .build());
-                    break;
-                case 2:
-                    Alertify.show(new AlertifyBuilder()
-                            .type(AlertifyType.ERROR)//RED
-                            .text(message)
-                            .autoClose(5000)
-                            .build());
-                    break;
-                case 3:
-                    Alertify.show(new AlertifyBuilder()
-                            .type(AlertifyType.SUCCESS)//GRERN
-                            .text(message)
-                            .autoClose(5000)
-                            .build());
-                    break;
-                case 4:
-                    Alertify.show(new AlertifyBuilder()
-                            .type(AlertifyType.WARNING)//YELLOW
-                            .text(message)
-                            .autoClose(5000)
-                            .build());
-                    break;
-                case 5:
-                    Alertify.show(new AlertifyBuilder()
-                            .type(AlertifyType.INFO)//BLUE
-                            .text(message)
-                            .autoClose(5000)
-                            .build());
-                    break;
-            }
-        }
-    }
-
 
     public void initUI(int width, int height, boolean resizable) {
         try {
@@ -189,8 +93,6 @@ public class Jframe extends Client implements ActionListener, WindowListener {
                     if (userPrompt == JOptionPane.YES_OPTION) {
                         System.exit(-1);
                         System.exit(0);
-                    } else {
-
                     }
                 }
 
@@ -215,7 +117,6 @@ public class Jframe extends Client implements ActionListener, WindowListener {
 
             setFocusTraversalKeysEnabled(false);
             JPanel gamePanel = new JPanel();
-            Insets insets = this.getInsets();
             super.setPreferredSize(new Dimension(width, height));
             frame.setLayout(new BorderLayout());
             gamePanel.setLayout(new BorderLayout());
@@ -260,7 +161,6 @@ public class Jframe extends Client implements ActionListener, WindowListener {
         frame.setUndecorated(undecorated);
         setFocusTraversalKeysEnabled(false);
         JPanel gamePanel = new JPanel();
-        Insets insets = this.getInsets();
         super.setPreferredSize(new Dimension(width - 10, height - 10));
         frame.setLayout(new BorderLayout());
         gamePanel.setLayout(new BorderLayout());
@@ -302,7 +202,7 @@ public class Jframe extends Client implements ActionListener, WindowListener {
     }
 
     public void setClientIcon() {
-        Image img = Toolkit.getDefaultToolkit().getImage("src\\com\\janus\\images\\bulb.gif");
+        Image img = Toolkit.getDefaultToolkit().getImage("src\\com\\janus\\images\\icon.png");
         if (img == null)
             return;
         frame.setIconImage(img);
@@ -343,10 +243,10 @@ public class Jframe extends Client implements ActionListener, WindowListener {
         /*
          * Create our buttons
          */
-        JButton pricesButton = createButton("Prices", "test.gif", "The official Janus Price Guide!");
-        JButton forumsButton = createButton("Wiki", "3366503.gif", "Open the Janus Wiki.");
-        JButton storeButton = createButton("Donate", "cart_icon.gif", "Open the official Janus store.");
-        JButton voteButton = createButton("Vote", "Small-checkmark.png", "Open the official Janus voting page.");
+        JButton pricesButton = createButton("Prices", "prices.gif", "The official Janus Price Guide!");
+        JButton forumsButton = createButton("Wiki", "wiki.gif", "Open the Janus Wiki.");
+        JButton storeButton = createButton("Donate", "donate.gif", "Open the official Janus store.");
+        JButton voteButton = createButton("Vote", "vote.png", "Open the official Janus voting page.");
         JButton scoresButton = createButton("HiScores", "hiscores.png", "Open the official Janus Highscores");
         JButton tsButton = createButton("Join Discord", "discord.png", "Join the Janus discord.");
 

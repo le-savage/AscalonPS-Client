@@ -116,9 +116,6 @@ public final class Player extends Entity {
                     modifiedColors[partId] = null;
                 }
                 modelCache.clear();
-				/*if(this == Client.myPlayer) {
-					Client.getClient().updateMaxCapeColors(modifiedColors[partId]);
-				}*/
             }
             if (partId == 8)
                 Client.myHeadAndJaw[0] = equipment[partId] - 256;
@@ -200,17 +197,6 @@ public final class Player extends Entity {
     }
 
     public Model method452() {
-		/*if (desc != null) {
-			int j = -1;
-			if (super.anim >= 0 && super.animationDelay == 0) {
-				j = Animation.anims[super.anim].frameIDs[super.currentAnimFrame];
-			} else if (super.anInt1517 >= 0) {
-				j = Animation.anims[super.anInt1517].frameIDs[super.currentForcedAnimFrame];
-			}
-			Model model = desc.getAnimatedModel(-1, j, null);
-			return model;
-		}
-		 */
         if (desc != null) {
             int currentFrame = -1;
             int nextFrame = -1;

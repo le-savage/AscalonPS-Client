@@ -10715,9 +10715,6 @@ public class Client extends RSApplet {
         chatTitles[0] = title;
         chatMessages[0] = s;
         chatRights[0] = rights;
-        if (s.contains(myUsername)) {
-            Jframe.minimisedTrayMessage(5, myUsername + " - Someone mentioned your name!");
-        }
     }
 
     public static void setTab(int id) {
@@ -12052,23 +12049,8 @@ public class Client extends RSApplet {
          */
         try {
             for (int i = 1; i <= 3; i++) {
-                if (!new File(signlink.findcachedir() + "load" + i + ".png").exists()) {
-                    String url = "";
-                    switch (i) {
-                        case 1:
-                            url = "https://www.janus.rip/downloads/load1.png";
-                            break;
-                        case 2:
-                            url = "https://www.janus.rip/downloads/load2.png";
-                            break;
-                        case 3:
-                            url = "https://www.janus.rip/downloads/load3.png";
-                            break;
-                    }
-                    HttpDownloadUtility.downloadFile(url, signlink.findcachedir());
-                }
                 loadingSprites[i - 1] = Toolkit.getDefaultToolkit()
-                        .getImage(signlink.findcachedir() + "load" + i + ".png");
+                        .getImage(signlink.findcachedir() + "load.png");
             }
             super.graphics.drawImage(loadingSprites[0], 0, 0, null);
             super.graphics.drawImage(loadingSprites[1], 5, clientHeight - 35, null);
@@ -12191,7 +12173,6 @@ public class Client extends RSApplet {
             geSearchBox = new Sprite("Interfaces/grandexchange/box");
             geSearchBoxHover = new Sprite("Interfaces/grandexchange/box2");
             mapBack = new Background(mediaArchives, "mapback", 0);
-            backgroundgif = new AnimatedSprite(signlink.findcachedir() + "bg.gif");
             mapEdge = new Sprite(mediaArchives, "mapedge", 0);
             mapEdge.method345();
             mapFlag = new Sprite(mediaArchives, "mapmarker", 0);
@@ -16475,18 +16456,12 @@ public class Client extends RSApplet {
                     opCode = -1;
                     return true;
 
-                case 181://Sending Tray Message
-                    int msgtype = inStream.readUnsignedWord();
-                    String trayMessage = inStream.readString();
-                    Jframe.trayMessage(msgtype, trayMessage);
-                    opCode = -1;
+                case 181://Was used to send Tray Message
+                    //UNUSED PACKED
                     return true;
 
-                case 182://Sending Tray Message //TODO CHANGE PACKET
-                    int msgtype2 = inStream.readUnsignedWord();
-                    String minimisedMessage = inStream.readString();
-                    Jframe.minimisedTrayMessage(msgtype2, minimisedMessage);
-                    opCode = -1;
+                case 182://was used to send Tray Message //TODO CHANGE PACKET
+                    //UNUSED PACKED
                     return true;
 
 
@@ -17513,11 +17488,10 @@ public class Client extends RSApplet {
                         try {
                             String message = TextInput.decodeToString(pktSize - 13, inStream);
                             if (playerRights != 0) {
-                                Jframe.minimisedTrayMessage(1, "New PM From: " + TextClass.fixName(TextClass.nameForLong(l5)));
+
                                 pushMessage(message, 7,
                                         getPrefix(playerRights, 0) + TextClass.fixName(TextClass.nameForLong(l5)));
                             } else {
-                                Jframe.minimisedTrayMessage(1, "New PM From: " + TextClass.fixName(TextClass.nameForLong(l5)));
                                 pushMessage(message, 3, TextClass.fixName(TextClass.nameForLong(l5)));
                             }
                         } catch (Exception exception1) {
@@ -18809,7 +18783,6 @@ public class Client extends RSApplet {
     final int[] currentExp;
     private Sprite mapFlag;
     private Sprite mapMarker;
-    private static Sprite backgroundgif;
     private final int[] anIntArray873;
     private final boolean[] aBooleanArray876;
     private int weight;

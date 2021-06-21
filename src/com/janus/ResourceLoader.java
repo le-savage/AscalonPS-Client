@@ -16,13 +16,8 @@ public class ResourceLoader {
     public Image getImage(String imageName) {
         if (loadedImages.containsKey(imageName))
             return loadedImages.get(imageName);
-        Image img = null;
-        try {
-            img = Toolkit.getDefaultToolkit().getImage(signlink.findcachedir() + "" + imageName + ".png");
-        } catch (Exception e) {
-            e.printStackTrace();
-            img = null;
-        }
+        Image img = Toolkit.getDefaultToolkit().getImage(signlink.findcachedir() + "" + imageName + ".png");
+
         if (img != null)
             loadedImages.put(imageName, img);
         return img;
@@ -31,12 +26,7 @@ public class ResourceLoader {
     static ResourceLoader rl = new ResourceLoader();
 
     public static Image loadImage(String imageName) {
-        URL url = null;
-        try {
-            url = rl.getClass().getResource("images/" + imageName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        URL url = rl.getClass().getResource("images/" + imageName);
 
         if (url == null) {
             System.out.println(imageName);

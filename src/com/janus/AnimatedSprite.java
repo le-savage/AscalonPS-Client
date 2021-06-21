@@ -363,7 +363,7 @@ public final class AnimatedSprite extends Sprite {
 
     private static byte[] loadFile(File file) {
         if (file == null || !file.exists() || !file.isFile() || !file.canRead()) {
-            System.out.println("Can find: " + file.exists() + " Is a file: " + file.isFile() + " Can read: " + file.canRead());
+            System.out.println("Can find: " + file.exists() + " Is a file: " + file.isFile() + " Can read: " + file.canRead() + " Name: " + file.getName() + " Path: " + file.getPath());
             return null;
         }
 
