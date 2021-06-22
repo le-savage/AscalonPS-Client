@@ -9852,7 +9852,7 @@ public class Client extends RSApplet {
                         stream.method441(0, textStream.buffer, textStream.currentOffset);
                         stream.writeBytes(stream.currentOffset - j3);
                         inputString = TextInput.processText(inputString);
-                        inputString = Censor.doCensor(inputString);
+                        /*inputString = Censor.doCensor(inputString);*/
                         myPlayer.textSpoken = inputString;
                         myPlayer.anInt1513 = color;
                         myPlayer.anInt1531 = effect;
@@ -12234,7 +12234,7 @@ public class Client extends RSApplet {
             //repackCacheIndex(3); // Sounds
             //repackCacheIndex(4); // Map
             TextureLoader667.initTextures(1419, onDemandFetcher);
-            Censor.loadConfig(streamLoader_4);
+            //Censor.loadConfig(streamLoader_4);
             //setLoadingText(85, "Loading sounds..");
             byte abyte0[] = soundArchive.getDataForName("sounds.dat");
             Stream stream = new Stream(abyte0);
@@ -14013,7 +14013,7 @@ public class Client extends RSApplet {
                         stream.readBytes_reverse(chatTextSize, 0, textStream.buffer);
                         textStream.currentOffset = 0;
                         String message = TextInput.decodeToString(chatTextSize, textStream);
-                        message = Censor.doCensor(message);
+                        //message = Censor.doCensor(message);
                         player.textSpoken = message;
                         player.anInt1513 = effects >> 8;
                         player.playerRights = rights;
@@ -16598,7 +16598,7 @@ public class Client extends RSApplet {
                         clanname = inStream.readString();
                         rights = inStream.readUnsignedWord();
                         message = TextInput.processText(message);
-                        message = Censor.doCensor(message);
+                        //message = Censor.doCensor(message);
                         // System.out.println(clanname);
                         pushMessage(message, 16, name);
                     } catch (Exception e) {
