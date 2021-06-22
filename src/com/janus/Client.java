@@ -12061,6 +12061,7 @@ public class Client extends RSApplet {
          * DOWNLOADING CACHE *
          */
         new CacheDownloader().run();
+        //final Splash s = new Splash();
 
         if (signlink.cache_dat != null) {
             for (int i = 0; i < 7; i++) {
