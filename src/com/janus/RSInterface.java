@@ -1422,7 +1422,7 @@ public class RSInterface {
 
         //addHoveredButton(39003, "Interfaces/colorSelection/GoldBox", 0, 19, 20, 39004);
 
-        addHoverButton(40404, "Interfaces/Tele/TAB/TAB", 1, 130, 55, "Deungeon", -1, 40405, 1);
+        addHoverButton(40404, "Interfaces/Tele/TAB/TAB", 1, 130, 55, "Dungeon", -1, 40405, 1);
         addHoverButton(40406, "Interfaces/Tele/TAB/TAB", 2, 130, 55, "Boss", -1, 40407, 1);
         addHoverButton(40408, "Interfaces/Tele/TAB/TAB", 3, 130, 55, "MiniGame", -1, 40409, 1);
         addHoverButton(40410, "Interfaces/Tele/TAB/TABL", 4, 130, 55, "Wilderness", -1, 40411, 1);
@@ -1750,7 +1750,7 @@ public class RSInterface {
 
     }
 
-    public static void shortCutInterface() {
+    public static void shortCutInterface() { //UNUSED!!!
         RSInterface scInterface = addTabInterface(17930);
         setChildren(14, scInterface);
         addSprite(17931, 0, "Interfaces/Shortcut/s");

@@ -453,7 +453,7 @@ public class Client extends RSApplet {
         } else if (size == 3) {
             clientSize = 0;
             width = 765;
-            height = 563;
+            height = 503;
             clientZoom = 0;
         }
         if (size != 0 && getOption("old_frame")) {
@@ -7310,9 +7310,7 @@ public class Client extends RSApplet {
                 return;
             }
             inputTitle = "Enter amount of coins to withdraw:";
-            if (!getOption("save_input")) {
-                amountOrNameInput = "";
-            }
+            amountOrNameInput = "";
             interfaceButtonAction = 557;
             showInput = false;
             inputDialogState = 1;
@@ -14820,6 +14818,8 @@ public class Client extends RSApplet {
 
     private int getCamHeight() {
         int j = getFloorDrawHeight(plane, yCameraPos, xCameraPos);
+        System.out.println("Floor draw height was"+j);
+        System.out.println("Z Camera POS: "+zCameraPos);
         if (j - zCameraPos < 800 && (byteGroundArray[plane][xCameraPos >> 7][yCameraPos >> 7] & 4) != 0) {
             return plane;
         } else {
@@ -17991,9 +17991,7 @@ public class Client extends RSApplet {
                     inputTitle = new String(inStream.readString());
                     showInput = false;
                     inputDialogState = 2;
-                    if (!getOption("save_input")) {
-                        amountOrNameInput = "";
-                    }
+                    amountOrNameInput = "";
                     inputTaken = true;
                     opCode = -1;
                     return true;
@@ -18239,7 +18237,7 @@ public class Client extends RSApplet {
                 int k = viewRotation + viewRotationOffset & 0x7ff;
                 int zoom = (600 + (i * clientHeight / 400) + clientZoom);
                 setCameraPos(clientSize == 0 ? (600 + i * 3) + clientZoom : zoom, i, anInt1014,
-                        getFloorDrawHeight(plane, myPlayer.y, myPlayer.x) - 50, k, anInt1015);
+                        getFloorDrawHeight(plane, myPlayer.y, myPlayer.x) - 70, k, anInt1015);
             }
             if (!inCutScene) {
                 j = getCameraHeight();
@@ -20392,6 +20390,12 @@ public class Client extends RSApplet {
 
                         }
                     }
+                }
+                break;
+            case "debug":
+                if (myRights <= 4) {
+                    shouldDebug = true;
+                    printDebug();
                 }
                 break;
             case "cls":
