@@ -140,8 +140,7 @@ public final class ObjectDef {
         if (objectDef.name != null) {
             String s = objectDef.name.toLowerCase();
             if (s.contains("bank booth") && !s.contains("closed")) {
-                objectDef.actions = new String[5];
-                objectDef.actions[0] = "Use";
+                objectDef.actions = new String[]{"Use", "Set-Pin", null, null, null};
                 objectDef.objectModelIDs = new int[]{23319};
                 objectDef.name = "Golden Booth";
             }
@@ -155,8 +154,9 @@ public final class ObjectDef {
         }
 
         if (i == 22819) {
-            objectDef.actions = new String[5];
-            objectDef.actions[0] = "Use";
+            /*objectDef.actions = new String[5];
+            objectDef.actions[0] = "Use";*/
+            objectDef.actions = new String[]{"Use", "Set-Pin", null, null, null};
             objectDef.name = "Golden Booth";
         }
 		/*if((i == 56031) || (i == 56032) || (i == 56034)) {

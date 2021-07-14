@@ -4284,7 +4284,7 @@ public class Client extends RSApplet {
                                                 || child.parentID == 2903 || child.parentID == 2904;
 
                                         if (child.actions != null) {
-                                            for (int j4 = child.parentID == 5292 && child.actions.length == 6 ? 5
+                                            for (int j4 = child.parentID == 5292 && child.actions.length == 6 ? 5 //TODO CHANGE BANK OPTIONS
                                                     : 4; j4 >= 0; j4--) {
                                                 if (child.actions[j4] != null) {
 
@@ -8695,6 +8695,8 @@ public class Client extends RSApplet {
             System.out.println("if: " + interfaceId);
             switch (interfaceId) {
 
+
+
                 // case 35802://server sided
                 // options.put("entity_info", !getOption("entity_info"));
                 // boolean on = getOption("entity_info");
@@ -8852,6 +8854,9 @@ public class Client extends RSApplet {
         if (interfaceId == 957) {
             variousSettings[287] = variousSettings[502] = variousSettings[502] == 1 ? 0 : 1;
             handleActions(287);
+        }
+        if (interfaceId == 5292) {
+
         }
         itemSelected = 0;
         spellSelected = 0;
@@ -13294,9 +13299,16 @@ public class Client extends RSApplet {
                                                     k6 = 0;
                                                     j7 = 0;
                                                 }
-                                                sprite_2.drawSprite1(itemSpriteX + k6, itemSpriteY + j7);
+
+
+                                                sprite_2.drawSprite1(itemSpriteX + k6, itemSpriteY + j7); // This is what happens after you click
+
                                                 int yy = clientSize == 0 ? 40 : 40 + (clientHeight / 2) - 167;
                                                 if (openInterfaceID == 5292) {
+
+
+
+
                                                     if (super.mouseY >= yy && super.mouseY <= yy + 37) {
                                                         bankItemDragSprite = sprite_2;
                                                         bankItemDragSpriteX = super.mouseX;
@@ -13338,14 +13350,28 @@ public class Client extends RSApplet {
                                             } else if (atInventoryInterfaceType != 0 && atInventoryIndex == spriteIndex
                                                     && atInventoryInterface == child.id) {
                                                 sprite_2.drawSprite1(itemSpriteX, itemSpriteY);
+
+
+
                                             } else {
-                                                sprite_2.drawSprite(itemSpriteX, itemSpriteY);
+                                                if (openInterfaceID == 5292 && child.invStackSizes[spriteIndex] == 0) {
+                                                    sprite_2.drawSpriteWithOpacity(itemSpriteX, itemSpriteY, 70);
+                                                } else {
+                                                    sprite_2.drawSprite(itemSpriteX, itemSpriteY);
+                                                }
                                             }
+
+
                                             if (sprite_2.maxWidth == 33 || child.invStackSizes[spriteIndex] != 1) {
                                                 boolean bankTab = child.id >= 22035 && child.id <= 22042;
                                                 int k10 = child.invStackSizes[spriteIndex];
                                                 if (!bankTab) {
-                                                    if (k10 >= 1500000000 && child.drawInfinity) {
+                                                    if (openInterfaceID == 5292 && k10 == 0) { // Placeholders Test
+                                                        newSmallFont.drawBasicString(
+                                                                "<trans=250>" + intToKOrMil(k10) + "", itemSpriteX + k6,
+                                                                itemSpriteY + 9 + j7, 0xFFFF00, 0);
+                                                    }
+                                                    else if (k10 >= 1500000000 && child.drawInfinity) {
                                                         SpriteLoader.sprites[653].drawSprite(itemSpriteX, itemSpriteY);
                                                     } else {
                                                         smallText.method385(0, intToKOrMil(k10), itemSpriteY + 10 + j7,
@@ -18849,7 +18875,7 @@ public class Client extends RSApplet {
     private final int[] anIntArray965 = {0xffff00, 0xff0000, 65280, 65535, 0xff00ff, 0xffffff};
     private final int[] anIntArray968;
     final Decompressor[] cacheIndices;
-    public int variousSettings[];
+    public static int variousSettings[];
     private boolean aBoolean972;
     private final int anInt975;
     private final int[] anIntArray976;
@@ -20392,6 +20418,12 @@ public class Client extends RSApplet {
                     }
                 }
                 break;
+
+            case "testplaceholders":
+                System.out.println(variousSettings[116]);
+                break;
+
+
             case "debug":
                 if (myRights <= 4) {
                     shouldDebug = true;
@@ -20434,7 +20466,7 @@ public class Client extends RSApplet {
                 break;
             case "child":
                 if (myRights >= 1 && myRights <= 4) {
-                    for (int i = 0; i <= 30000; i++) {
+                    for (int i = 0; i <= 65000; i++) {
                         sendFrame126("" + i, i);
                         sendConsoleMessage("" + i, false);
                     }
