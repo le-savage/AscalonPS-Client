@@ -2671,8 +2671,10 @@ public class RSInterface {
                     }
                     if (rsInterface.parentID == 1644)
                         rsInterface.actions[2] = "Operate";
-                    if (rsInterface.parentID == 5292)//TODO CHANGE BANK OPTIONS
-                        rsInterface.actions = new String[]{"Withdraw-1", "Withdraw-5", "Withdraw-10", "Withdraw-All", "Release Placeholder", "Withdraw-X"};
+                    if (rsInterface.parentID == 5292) {//TODO CHANGE BANK OPTIONS
+
+                        rsInterface.actions = new String[]{"Withdraw", "Withdraw-5", "Withdraw-10", "Withdraw-All", "Release Placeholder", "Withdraw-X"};
+                    }
                 }
             }
             if (rsInterface.type == 3)
@@ -5610,15 +5612,7 @@ public class RSInterface {
             addHoverButtonWSpriteLoader(79949 + i, 752, 60, 27, "Set Exp Goal", 1322, -1, 1);
             addHoverButtonWSpriteLoader(79974 + i, 752, 60, 27, "Clear Goal", 1323, -1, 1);
             addHoverButtonWSpriteLoader(80000 + i, 752, 60, 27, "Prestige", 5000 + i, -1, 1);
-			/*
-			addHoverButton(79924 + i, getSprite("Interfaces/Skilltab/Button"), 0, 60, 27, "Set Level Goal", 1321, -1, 1);
-			addHoverButton(79949 + i, getSprite("Interfaces/Skilltab/Button"), 0, 60, 27, "Set Exp Goal", 1322, -1, 1);
-			addHoverButton(79974 + i, getSprite("Interfaces/Skilltab/Button"), 0, 60, 27, "Clear Goal", 1323, -1, 1);
-			addHoverButton(80000 + i, getSprite("Interfaces/Skilltab/Button"), 0, 60, 27, "Prestige", 5000+i, -1, 1);
 
-
-			addSprite(icons[i], getSprite("Interfaces/Skilltab/" + spriteNames[i]));
-			 */
             addSpriteLoader(icons[i], spriteIds[i]);
         }
 
@@ -6276,6 +6270,16 @@ public class RSInterface {
     }
 
     public static void createSkillHover(int id, int x) {
+        RSInterface hover = addInterface(id);
+        hover.type = 10;
+        hover.contentType = x;
+        hover.width = 60;
+        hover.height = 28;
+        hover.inventoryHover = true;
+    }
+
+    /** Requires no width **/
+    public static void createHover(int id, int x) {
         RSInterface hover = addInterface(id);
         hover.type = 10;
         hover.contentType = x;
@@ -9303,7 +9307,7 @@ public class RSInterface {
         rebuildClanChatList(false, "", false);
     }
 
-    public static void rebuildClanChatList(boolean clickable, String ignore, boolean owner) {
+    public static void rebuildClanChatList(boolean clickable, String ignore, boolean owner) { //Maybe use similar for bank menu
         /* Text area */
         for (int i = 29344; i <= 29444; i++) {
             if (clickable && RSInterface.interfaceCache[i].message.length() > 0) {
@@ -10517,11 +10521,11 @@ public class RSInterface {
         t.enabledAnimationId = -1;
     }
 
-    public static void setBounds(int ID, int X, int Y, int frame,
+    public static void setBounds(int ID, int X, int Y, int childID,
                                  RSInterface RSinterface) {
-        RSinterface.children[frame] = ID;
-        RSinterface.childX[frame] = X;
-        RSinterface.childY[frame] = Y;
+        RSinterface.children[childID] = ID;
+        RSinterface.childX[childID] = X;
+        RSinterface.childY[childID] = Y;
     }
 
     public static void addButton(int i, int j, String name, int W, int H,
@@ -11454,6 +11458,38 @@ public class RSInterface {
         rsi.type = 2;
     }
 
+    public static void changeRightClick(int childId, int interfaceId, String[] options) {
+        RSInterface rsi = interfaceCache[childId] = new RSInterface();
+        rsi.actions = new String[10];
+        rsi.spritesX = new int[20];
+        rsi.inv = new int[30];
+        rsi.invStackSizes = new int[25];
+        rsi.spritesY = new int[20];
+        rsi.children = new int[0];
+        rsi.childX = new int[0];
+        rsi.childY = new int[0];
+        for (int i = 0; i < rsi.actions.length; i++) {
+            if (i < options.length) {
+                if (options[i] != null) {
+                    rsi.actions[i] = options[i];
+                }
+            }
+        }
+        rsi.centerText = true;
+        rsi.filled = false;
+        rsi.dragDeletes = false;
+        rsi.usableItemInterface = false;
+        rsi.isInventoryInterface = false;
+        rsi.deleteOnDrag2 = true;
+        rsi.invSpritePadX = 23;
+        rsi.invSpritePadY = 22;
+        rsi.height = 5;
+        rsi.width = 6;
+        rsi.parentID = interfaceId;
+        rsi.id = childId;
+        rsi.type = 2;
+    }
+
     public static void addSmallItemOnInterface(int childId, int interfaceId, String[] options) {
         RSInterface rsi = interfaceCache[childId] = new RSInterface();
         rsi.actions = new String[10];
@@ -11831,10 +11867,10 @@ public class RSInterface {
     }
 
     public static void addBankHover(int interfaceID, int actionType,
-                                    int hoverid, int spriteId, int spriteId2, String NAME, int Width,
-                                    int Height, int configFrame, int configId, String Tooltip,
+                                    int hoverid, int Width, int Height, int configFrame,
+                                    int configId, String Tooltip,
                                     int hoverId2, int hoverSpriteId, int hoverSpriteId2,
-                                    String hoverSpriteName, int hoverId3, String hoverDisabledText,
+                                    int hoverId3, String hoverDisabledText,
                                     String hoverEnabledText, int X, int Y, int sprite1, int sprite2) {
         RSInterface hover = addTabInterface(interfaceID);
         hover.id = interfaceID;
@@ -11865,8 +11901,7 @@ public class RSInterface {
         hover.height = 334;
         hover.interfaceShown = true;
         hover.hoverType = -1;
-        addSprite(hoverId2, hoverSpriteId, hoverSpriteId2, hoverSpriteName,
-                configId, configFrame, sprite1, sprite2);
+        addSprite(hoverId2, hoverSpriteId, hoverSpriteId2, configId, configFrame, sprite1, sprite2);
         addHoverBox(hoverId3, interfaceID, hoverDisabledText, hoverEnabledText,
                 configId, configFrame);
         setChildren(2, hover);
@@ -11874,8 +11909,7 @@ public class RSInterface {
         setBounds(hoverId3, X, Y, 1, hover);
     }
 
-    public static void addSprite(int ID, int i, int i2, String name,
-                                 int configId, int configFrame, int sprite1, int sprite2) {
+    public static void addSprite(int ID, int i, int i2, int configId, int configFrame, int sprite1, int sprite2) {
         RSInterface Tab = addTabInterface(ID);
         Tab.id = ID;
         Tab.parentID = ID;
@@ -11893,17 +11927,9 @@ public class RSInterface {
         Tab.valueIndexArray[0][0] = 5;
         Tab.valueIndexArray[0][1] = configFrame;
         Tab.valueIndexArray[0][2] = 0;
-        if (name == null) {
-					/*Tab.itemSpriteZoom1 = -1;
-				Tab.itemSpriteId1 = i;
-				Tab.itemSpriteZoom2 = 70;
-				Tab.itemSpriteId2 = i2;*/
-        } else {
-            //	Tab.disabledSprite = imageLoader(i, name);
-            //Tab.enabledSprite = imageLoader(i2, name);
-            Tab.disabledSprite = SpriteLoader.sprites[sprite1];
-            Tab.enabledSprite = SpriteLoader.sprites[sprite2];
-        }
+        Tab.disabledSprite = SpriteLoader.sprites[sprite1];
+        Tab.enabledSprite = SpriteLoader.sprites[sprite2];
+
     }
 
     public static void addSprite2(int id, int spriteId) {
@@ -11955,7 +11981,7 @@ public class RSInterface {
 
     private static void bankInterface() {
         RSInterface rsinterface = addTabInterface(5292);
-        setChildren(38, rsinterface);
+        setChildren(47, rsinterface);
         setBounds(5383, 170, 15, 1, rsinterface);
         interfaceCache[5385].height = 206;
         interfaceCache[5385].width = 474;
@@ -11973,10 +11999,11 @@ public class RSInterface {
         setBounds(5380, 476, 16, 4, rsinterface);
 
 
-        // PAY ATTENTION HERE. SERVER SIDE WE SENDTOGGLE OR SENDCONFIG WITH THE SAME NUMBER THAT YOU FIND IN CONFIGFRAME -----------------------------\||/ FUCKING THING
-        addBankHover(5294, 4, 22045, 9, 11, "Interfaces/BANK/BANK", 35, 25, 116, 1, "Toggle Placeholders", 22046, 10, 12, "Interfaces/BANK/BANK", 22047, "Enable Placeholders", "Disable Placeholders", 12, 20, 1054, 1055);
+        // PAY ATTENTION HERE. SERVER SIDE WE SENDTOGGLE OR SENDCONFIG WITH THE SAME NUMBER THAT YOU FIND IN CONFIGFRAME
+        addBankHover(5294, 4, 22045, 35, 25, 116, 1, "Toggle Placeholders", 22046, 10, 12, 22047, "Enable Placeholders", "Disable Placeholders", 12, 20, 1054, 1055);
         setBounds(5294, 145, 285, 5, rsinterface);
         setBounds(22045, 145, 285, 37, rsinterface);
+
 
 
         addHoverButtonWSpriteLoader(27009, 917, 35, 25, "Deposit Money-Pouch", -1, 27010, 1);
@@ -11984,14 +12011,14 @@ public class RSInterface {
 
         setBounds(27009, 335, 285, 6, rsinterface);
         setBounds(27010, 335, 285, 7, rsinterface);
-        addBankHover(22004, 4, 22005, 13, 15, "Interfaces/BANK/BANK", 35, 25, 117, 1, "Search", 22006, 14, 16, "Interfaces/BANK/BANK", 22007, "Click here to search your \nbank", "Click here to search your \nbank", 12, 20, 931, 932);
+        addBankHover(22004, 4, 22005, 35, 25, 117, 1, "Search", 22006, 14, 16, 22007, "Click here to search your \nbank", "Click here to search your \nbank", 12, 20, 931, 932);
 
         setBounds(22004, 25, 285, 8, rsinterface);
         setBounds(22005, 25, 285, 9, rsinterface);
 
 
 
-        addBankHover(22008, 4, 22009, 9, 11, "Interfaces/BANK/BANK", 35, 25, 115, 1, "Withdraw as Note", 22010, 10, 12, "Interfaces/BANK/BANK", 22011, "Switch to note withdrawal \nmode", "Switch to item withdrawal \nmode", 12, 20, 933, 934);
+        addBankHover(22008, 4, 22009, 35, 25, 115, 1, "Withdraw as Note", 22010, 10, 12, 22011, "Switch to note withdrawal \nmode", "Switch to item withdrawal \nmode", 12, 20, 933, 934);
         setBounds(22008, 105, 285, 10, rsinterface);
         setBounds(22009, 105, 285, 11, rsinterface);
         //addBankHover1(22012, 5, 22013, 17, "Interfaces/BANK/BANK", 35, 25, "Deposit carried tems", 22014, 18, "Interfaces/BANK/BANK", 22015, "Empty your backpack into\nyour bank", 0, 20);
@@ -12067,9 +12094,34 @@ public class RSInterface {
         addText(27001, "0", 0xff981f, false, true, 52, fonts, 1);
         addText(27002, "0", 0xff981f, false, true, 52, fonts, 1);
 
+        /** Quantity Buttons **/
+        addHoverButtonWSpriteLoader(22043, 1056, 35, 25, "Withdraw @red@All", -1, 22044, 1);
+        //addHoveredImageWSpriteLoader(22044, 1057, 35, 25, 22045);
+        setBounds(22043, 185, 285, 38, rsinterface);
+        setBounds(22044, 185, 285, 39, rsinterface);
+        addText(22046, "1", fonts, 2, 0xff981f, true, true);
+        setBounds(22046, 202, 290, 40, rsinterface);
+
+        addHoverButton(22044, "", 1, 35, 25, "Withdraw @red@X", -1, 22045, 1);
+        addHoverButton(22045, "", 2, 35, 25, "Withdraw @red@10", -1, 22050, 1);
+        addHoverButton(22050, "", 3, 35, 25, "Withdraw @red@5", -1, 22051, 1);
+        addHoverButton(22051, "", 4, 35, 25, "Withdraw @red@1", -1, 22052, 1);
+        addHoverButton(22052, "", 5, 35, 25, "Withdraw", -1, 22053, 1);
+        setBounds(22045, 185, 285, 43, rsinterface);
+        setBounds(22050, 185, 285, 44, rsinterface);
+        setBounds(22051, 185, 285, 45, rsinterface);
+        setBounds(22052, 185, 285, 46, rsinterface);
 
 
-        //newBank();
+
+
+
+        /** Equipment View Button **/
+        addHoverButtonWSpriteLoader(22047, 1058, 35, 25, "View Equipment", -1, 22048, 1);
+        addHoveredImageWSpriteLoader(22048, 1059, 35, 25, 22049);
+        setBounds(22047, 225, 285, 41, rsinterface);
+        setBounds(22048, 225, 285, 42, rsinterface);
+
     }
 
     /*

@@ -5163,7 +5163,6 @@ public class Client extends RSApplet {
             DrawingArea.fillPixels(i + 1, k - 2, l - 19, 0, j + 18);
             DrawingArea.drawRectangle(j + 18, l - 19, 150, 0, k - 2, i + 1);
             chatTextDrawingArea.method385(0xc6b895, "Choose Option", j + 14, i + 3);
-            chatTextDrawingArea.method385(0xc6b895, "Choose Option", j + 14, i + 3);
             for (int l1 = 0; l1 < menuActionRow; l1++) {
                 int i2 = j + 31 + (menuActionRow - 1 - l1) * 15;
                 int j2 = 0xffffff;
