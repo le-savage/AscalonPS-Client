@@ -6,7 +6,7 @@ public class Configuration {
     //public final static String HOST = "127.0.0.1";
 
 
-    private static final boolean LOCAL = true; //only set this to false when you want to connect locally
+    private static final boolean LOCAL = false; //only set this to false when you want to connect locally
     public final static String HOST = LOCAL ? "127.0.0.1" : "51.195.217.64";  //public ip SECOND
 
 

@@ -11981,7 +11981,7 @@ public class RSInterface {
 
     private static void bankInterface() {
         RSInterface rsinterface = addTabInterface(5292);
-        setChildren(47, rsinterface);
+        setChildren(48, rsinterface);
         setBounds(5383, 170, 15, 1, rsinterface);
         interfaceCache[5385].height = 206;
         interfaceCache[5385].width = 474;
@@ -12088,13 +12088,25 @@ public class RSInterface {
         setBounds(22041, 365, 39, 35, rsinterface);
         addBankItem(22042, Boolean.valueOf(false));
         setBounds(22042, 413, 39, 36, rsinterface);
-        addBankHover(21000, 4, 21001, 172, 175, 35, 25, 304, 1, "Swap Withdraw Mode", 21002, 174, 173, 21003, "Switch to insert items \nmode", "Switch to swap items \nmode.", 12, 20);
-        setBounds(21000, 65, 285, 37, rsinterface);
+
+
+        addBankHover(22053, 4, 22054, 35, 25, 304, 1, "Toggle Deposit Method", 22055, 10, 12, 22056, "Switch to \ninsertion mode", "Switch to \nSwap mode", 12, 20, 1060, 1061);
+        setBounds(22053, 65, 285, 37, rsinterface);
+        setBounds(22054, 65, 285, 47, rsinterface);
+
         addText(27000, "0", 0xff981f, false, true, 52, fonts, 1);
         addText(27001, "0", 0xff981f, false, true, 52, fonts, 1);
         addText(27002, "0", 0xff981f, false, true, 52, fonts, 1);
 
-        /** Quantity Buttons **/
+
+
+        /** Equipment View Button **/
+        addHoverButtonWSpriteLoader(22047, 1058, 35, 25, "View Equipment", -1, 22048, 1);
+        addHoveredImageWSpriteLoader(22048, 1059, 35, 25, 22049);
+        setBounds(22047, 225, 285, 41, rsinterface);
+        setBounds(22048, 225, 285, 42, rsinterface);
+
+        /** Withdraw Quantity Button **/
         addHoverButtonWSpriteLoader(22043, 1056, 35, 25, "Withdraw @red@All", -1, 22044, 1);
         //addHoveredImageWSpriteLoader(22044, 1057, 35, 25, 22045);
         setBounds(22043, 185, 285, 38, rsinterface);
@@ -12116,11 +12128,7 @@ public class RSInterface {
 
 
 
-        /** Equipment View Button **/
-        addHoverButtonWSpriteLoader(22047, 1058, 35, 25, "View Equipment", -1, 22048, 1);
-        addHoveredImageWSpriteLoader(22048, 1059, 35, 25, 22049);
-        setBounds(22047, 225, 285, 41, rsinterface);
-        setBounds(22048, 225, 285, 42, rsinterface);
+
 
     }
 
